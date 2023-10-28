@@ -16,6 +16,17 @@ const (
 
 var randomid = uuid.MustParse("bbf4f504-f8db-4aa2-92d1-11b51b0e6d4d")
 
+func TestNew(t *testing.T) {
+	id := New(autoincr)
+	if id.RandomID() == randomid {
+		t.Error("invalid random id")
+	}
+
+	if id.Autoincr() != autoincr {
+		t.Error("invalid autoincr")
+	}
+}
+
 func TestNewShadowID(t *testing.T) {
 	id := NewShadowID(autoincr, randomid)
 	if id.String() != shadowIDExample {

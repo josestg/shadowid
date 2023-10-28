@@ -19,6 +19,12 @@ func SetSalt(s uint64) { defaultSalt.Store(s) }
 // 24 bytes = 8 bytes of autoincr + 16 bytes of UUIDv4
 type ShadowID [24]byte
 
+// New creates a new ShadowID from the autoincr and generates a random ID (UUIDv4).
+func New(autoincr int64) ShadowID {
+	return NewShadowID(autoincr, uuid.New())
+}
+
+// NewShadowID creates a new ShadowID from the autoincr and random ID (UUIDv4).
 func NewShadowID(autoincr int64, randomid uuid.UUID) ShadowID {
 	var id ShadowID
 
